@@ -1,0 +1,56 @@
+.cs-containder{
+    margin-left: 0;
+    margin-right: 0;
+    max-width: 100%;
+}
+.cs-data-input-nav{
+    margin-top: 0.5%;
+}
+.cs-input-group-text{
+    width: 20%;
+}
+.cs-data-input {
+    margin-bottom: 1% !important;
+}
+.cs-client-content {
+    height: 320px;
+    overflow: auto;
+}
+.cs-view-detail {
+    border: 0.5px solid #bf7b7b;
+    margin: 0.5%;
+    padding: 0.5%;
+    border-radius: 1%;
+    float: left;
+}
+.cs-view .cs-view-detail .cs-view-detail-content{
+    border: 1px solid #ccc;
+    position: relative;
+}
+.cs-view .cs-view-detail .cs-view-detail-content .rect-item{
+    border: 1px solid #ccc;
+    border-style: dashed;
+    position: absolute;
+    padding-left: 1%;
+    background-color: azure;
+}
+.cs-view .cs-view-detail .cs-view-detail-content.content-1{
+    height: 720px;
+    width: 360px;
+}
+.cs-view .cs-view-detail .cs-view-detail-content.content-2{
+    height: 720px;
+    width: 360px;
+}
+.cs-view .cs-view-detail .cs-view-detail-content.content-3{
+    height: 720px;
+    width: 360px;
+}
+.cs-view .cs-view-detail .cs-view-detail-content.content-4{
+    height: 720px;
+    width: 360px;
+}
+.cs-view .cs-view-detail .cs-view-detail-content.content-5{
+    height: 720px;
+    width: 360px;
+}
