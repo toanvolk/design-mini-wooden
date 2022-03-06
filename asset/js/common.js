@@ -28,3 +28,12 @@ Number.prototype.convertMilimetToCentimet = function(){
 Number.prototype.convertCentimetToMilimet = function(){
     return this*10;
 }
+Date.prototype.toDateStringDisplay = function(){
+    let today = new Date();
+    let dd = String(today.getDate()).padStart(2, '0');
+    let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    let yyyy = today.getFullYear();
+    let HH = today.getHours();
+    let min = today.getMinutes();
+    return  dd  +'/'+ mm +'/' + yyyy + ' '+HH+ ':'+min ;
+}

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap 5 Example</title>
+  <title>Sắp xếp ván</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -19,6 +19,42 @@
 <div class="container mt-5 cs-containder">
   <div class="row">
     <div class="col-sm-4 cs-setup">
+      <div class="row cs-project-info">
+        <div class="input-group mb-3 cs-project-action">
+          <button class="btn btn-success btn-new-project">Tạo mới</button>
+          <div class="area-choose-project">
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-info area-choose-project" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                Chọn
+              </button>
+
+              <!-- Modal -->
+              <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      ...
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                      <button type="button" class="btn btn-primary">OK</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+        <h3>Thông tin dự án</h3> 
+        <div class="input-group mb-3 cs-project-info">
+          <span class="input-group-text cs-input-group-text">Tên</span>
+          <input type="text"class="form-control cs-project-name"placeholder="Tên dự án" >
+          <button class="btn btn-success btn-save-project">Lưu</button>
+        </div>
+      </div>
       <div class="row cs-config">
         <h3>Cấu hình</h3>
         <p class="cs-data"></p>

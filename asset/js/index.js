@@ -26,5 +26,48 @@
         indexJs.data.client.push(objClass);
         indexJs.reload();
     });
-    
+    $('.btn-save-project').click(function(){
+        let projectName = $('input.cs-project-name').val();
+        let data = $('input.cs-project-name').prop('data');
+
+        if(projectName.trim() == '')
+        {
+            alert("Hãy nhập tên dự án.");
+            return;
+        }
+        let objProject= {};
+        if(data == null){
+            objProject = {
+                id:  'woodle_'+ Date.now(),
+                projectName: projectName,
+                createTime: new Date().toDateStringDisplay()
+            }
+            //Lưu danh sách chọn
+            indexJs.projectList.push(objProject.id);
+            localStorage.setItem(indexJs.const.projectListString, JSON.stringify(indexJs.projectList));
+        }
+        else
+        {
+            objProject = $('input.cs-project-name').prop('data');
+            objProject['projectName']=projectName;
+            objProject['lastModifyTime'] = new Date().toDateStringDisplay();
+        }
+        //lưu data
+        objProject['dataSource'] = indexJs.data.client;
+        let dataString = JSON.stringify(objProject);
+        localStorage.setItem(objProject.id, dataString);
+        $('input.cs-project-name').prop('data',objProject);
+
+        alert('Lưu thành công!');
+    });
+    $('.btn-new-project').click(function(){
+        let data = $('input.cs-project-name').prop('data',null);       
+        //clear control
+        $('input.cs-project-name').val('');
+        indexJs.data.client = [];
+        indexJs.reload();
+    });
+    $('.btn-choose-project').click(function(){
+
+    });
 })(indexJs);

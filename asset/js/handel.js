@@ -1,7 +1,8 @@
 var indexJs = {
     const: {
         HtmlClientContent: '<div class="input-group mb-3 cs-data-input"><span class="input-group-text cs-input-group-text bd-data bd-name" data-field="name"></span><input type="number"class="form-control bd-data bd-w"placeholder="W" data-field="w" readonly><input type="number"class="form-control bd-data bd-h"placeholder="H" data-field="h" readonly><input type="number"class="form-control bd-data bd-quanlity" placeholder="Số lượng" data-field="quantity"><button class="btn btn-danger cs-btn-remove-item">-</button></div>',
-        constantZOOM: 1
+        constantZOOM: 1,
+        projectListString: 'woodle_list_private'
     },
     data: {
         config:{
@@ -11,17 +12,18 @@ var indexJs = {
             y:720,
         },
         client:[
-            {
-                id: cs_common.newId(),
-                w:500,
-                h:600,
-                bg_color: "#f6ad68",
-                quantity:1
-            }
+            
         ]
     },
+    projectList:[],
+
     init: function(){
         $('.cs-setup .cs-data').text("W: "+indexJs.data.config.w + " | "+ "H: "+indexJs.data.config.h + " (đơn vị: mm)");
+        // Load dữ liệu đệm
+        let sourceProjectList = localStorage.getItem(this.projectListString);
+        if(sourceProjectList != null){
+            indexJs.projectList = JSON.parse(sourceProjectList);
+        };
         // khởi tạo thiết lập
         indexJs.reload();        
     },
