@@ -1,4 +1,5 @@
-var indexJs = {
+var indexJs = 
+{
     const: {
         HtmlClientContent: '<div class="input-group mb-3 cs-data-input"><span class="input-group-text cs-input-group-text bd-data bd-name" data-field="name"></span><input type="number"class="form-control bd-data bd-w"placeholder="W" data-field="w" readonly><input type="number"class="form-control bd-data bd-h"placeholder="H" data-field="h" readonly><input type="number"class="form-control bd-data bd-quanlity" placeholder="Số lượng" data-field="quantity"><button class="btn btn-danger cs-btn-remove-item">-</button></div>',
         constantZOOM: 1,
@@ -9,11 +10,9 @@ var indexJs = {
             w:1200,
             h:2400,
             x:360,
-            y:720,
+            y:720
         },
-        client:[
-            
-        ]
+        client:[]
     },
     projectList:[],
 
@@ -38,7 +37,7 @@ var indexJs = {
         else
         {
             return (value/this.data.config.h)*100;
-        }
+        };
     },
     convertRealSize: function(value){
         return value/this.const.constantZOOM;
@@ -68,13 +67,12 @@ var indexJs = {
             objRect.quantity = this.value;
             
             indexJs.reload();
-            setTimeout(function() { $("input#"+id+":first").focus()}, 1000);
         });
         $('.cs-btn-remove-item').click(function(){
             let id = $(this).closest('.cs-data-input').attr('id');
             let indexObj = indexJs.data.client.findIndex(function(obj) {
                 return obj.id == id;
-            })
+            });
             if (indexObj !== -1) indexJs.data.client.splice(indexObj, 1);
             indexJs.reload();
         });
@@ -92,7 +90,7 @@ var indexJs = {
         indexJs.projectList.forEach(project => {
             index++;
             let objProject = JSON.parse(localStorage.getItem(project));
-            htmlData+='<tr data-id="'+objProject.id+'"><th scope="row">'+index+'</th><td><p class="text-info btn-choose-project cs-pointer">'+objProject.projectName+'</p></td><td>'+objProject.createTime+'</td><td><i class="fas fa-trash-alt btn-remove-project cs-pointer"></i></td></tr>'
+            htmlData+='<tr data-id="'+objProject.id+'"><th scope="row">'+index+'</th><td><p class="text-info btn-choose-project cs-pointer">'+objProject.projectName+'</p></td><td>'+objProject.createTime+'</td><td><i class="fas fa-trash-alt btn-remove-project cs-pointer"></i></td></tr>';
         });
         htmlTable = htmlTable.replace('{list-source}',htmlData);
         $('.project-list').append($(htmlTable));
@@ -107,9 +105,16 @@ var indexJs = {
     },
     mapSourceProject: function(data){
         $('input.cs-project-name').prop('data',data);       
-        //clear control
-        $('input.cs-project-name').val(data?.projectName ?? '');
-        indexJs.data.client = data.dataSource ?? [];
+        if(data==null)
+        {
+            $('input.cs-project-name').val('');
+            indexJs.data.client = [];
+        }
+        else
+        {
+            $('input.cs-project-name').val(data.projectName);
+            indexJs.data.client = data.dataSource;
+        };
         indexJs.reload();
     },
     designAuto: function(){
@@ -137,7 +142,7 @@ var indexJs = {
                     h: indexJs.convertToDisplay(value.h)
                 };
                 rects.push(objRect);
-            }
+            };
         });
         //with sort
         rects.sort(function(a, b) {
@@ -227,4 +232,5 @@ var indexJs = {
         let $content = $('#view-main');       
         $content.html('');
     }
+    
 };
