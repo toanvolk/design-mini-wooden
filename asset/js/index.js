@@ -61,13 +61,15 @@
         alert('Lưu thành công!');
     });
     $('.btn-new-project').click(function(){
-        let data = $('input.cs-project-name').prop('data',null);       
+        $('#create-new-project').modal('hide');
+        $('input.cs-project-name').prop('data',null);       
         //clear control
         $('input.cs-project-name').val('');
         indexJs.data.client = [];
         indexJs.reload();
     });
-    $('.btn-choose-project').click(function(){
-
+    $('button.area-choose-project-action').click(function(){
+        indexJs.loadProjectList();
     });
+
 })(indexJs);

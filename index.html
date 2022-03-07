@@ -8,6 +8,7 @@
   <link href="./asset/css/index.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://kit.fontawesome.com/198e866ffa.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -21,27 +22,50 @@
     <div class="col-sm-4 cs-setup">
       <div class="row cs-project-info">
         <div class="input-group mb-3 cs-project-action">
-          <button class="btn btn-success btn-new-project">Tạo mới</button>
-          <div class="area-choose-project">
+          <div class="area-create-project">
               <!-- Button trigger modal -->
-              <button type="button" class="btn btn-info area-choose-project" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                Chọn
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create-new-project">
+                Tạo mới
               </button>
 
               <!-- Modal -->
-              <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal fade" id="create-new-project" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                      <!-- <h5 class="modal-title" id="exampleModalLabel">Tạo dự án mới ?</h5> -->
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
+                      Tạo dự án mới?
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Thoát</button>
+                      <button type="button" class="btn btn-primary btn-new-project">Tạo</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+          <div class="area-choose-project">
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-info area-choose-project-action" data-bs-toggle="modal" data-bs-target="#project-list">
+                Danh sách
+              </button>
+
+              <!-- Modal -->
+              <div class="modal fade" id="project-list" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="staticBackdropLabel">Danh sách dự án</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body project-list">
                       ...
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                      <button type="button" class="btn btn-primary">OK</button>
                     </div>
                   </div>
                 </div>
@@ -73,7 +97,9 @@
         <div class="cs-client-content">
         </div>
       </div>
-      
+      <div class="row cs-summary">
+        <p>Số tấm cắt: <span class="cs-quantity-cut cs-summary-value"></span>, Tổng ván cần đặt: <span class="cs-quantity-big cs-summary-value"></span></p>
+      </div>
     </div>
     <div class="col-sm-8 cs-view" id="view-main">
       <div class="cs-view-detail">
@@ -100,6 +126,7 @@
     </div>
   </div>
 </div>
+
 <script src="./asset/js/common.js"></script>
 <script src="./asset/js/handel.js"></script>
 <script src="./asset/js/index.js"></script>

@@ -1,3 +1,6 @@
+.cs-pointer{
+    cursor: pointer;
+}
 .cs-containder{
     margin-left: 0;
     margin-right: 0;
@@ -26,6 +29,8 @@
 .cs-view .cs-view-detail .cs-view-detail-content{
     border: 1px solid #ccc;
     position: relative;
+    height: 720px;
+    width: 360px;
 }
 .cs-view .cs-view-detail .cs-view-detail-content .rect-item{
     border: 1px solid #ccc;
@@ -34,23 +39,6 @@
     padding-left: 1%;
     background-color: azure;
 }
-.cs-view .cs-view-detail .cs-view-detail-content.content-1{
-    height: 720px;
-    width: 360px;
-}
-.cs-view .cs-view-detail .cs-view-detail-content.content-2{
-    height: 720px;
-    width: 360px;
-}
-.cs-view .cs-view-detail .cs-view-detail-content.content-3{
-    height: 720px;
-    width: 360px;
-}
-.cs-view .cs-view-detail .cs-view-detail-content.content-4{
-    height: 720px;
-    width: 360px;
-}
-.cs-view .cs-view-detail .cs-view-detail-content.content-5{
-    height: 720px;
-    width: 360px;
+.cs-summary .cs-summary-value{
+    color: red;
 }

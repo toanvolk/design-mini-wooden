@@ -20,10 +20,11 @@ var indexJs = {
     init: function(){
         $('.cs-setup .cs-data').text("W: "+indexJs.data.config.w + " | "+ "H: "+indexJs.data.config.h + " (đơn vị: mm)");
         // Load dữ liệu đệm
-        let sourceProjectList = localStorage.getItem(this.projectListString);
+        let sourceProjectList = localStorage.getItem(this.const.projectListString);
         if(sourceProjectList != null){
             indexJs.projectList = JSON.parse(sourceProjectList);
         };
+        this.loadProjectList();
         // khởi tạo thiết lập
         indexJs.reload();        
     },
@@ -80,6 +81,37 @@ var indexJs = {
         //design auto
         indexJs.designAuto();
     },
+    loadProjectList: function(){
+        $('.project-list').html('');
+        let htmlTable = '<table class="table project-list-table"><thead><tr><th scope="col">#</th><th scope="col">Tên dự án</th><th scope="col">Ngày tạo</th><th scope="col">...</th></tr></thead><tbody>{list-source}</tbody></table>';
+        let htmlData = '';
+        let index = 0;
+        indexJs.projectList.sort(function(a, b) {
+            return b.localeCompare(a);
+        });
+        indexJs.projectList.forEach(project => {
+            index++;
+            let objProject = JSON.parse(localStorage.getItem(project));
+            htmlData+='<tr data-id="'+objProject.id+'"><th scope="row">'+index+'</th><td><p class="text-info btn-choose-project cs-pointer">'+objProject.projectName+'</p></td><td>'+objProject.createTime+'</td><td><i class="fas fa-trash-alt btn-remove-project cs-pointer"></i></td></tr>'
+        });
+        htmlTable = htmlTable.replace('{list-source}',htmlData);
+        $('.project-list').append($(htmlTable));
+
+        //init event
+        $('p.btn-choose-project').click(function(){
+            let id = $(this).closest('tr').data('id');
+            let objDataProject = localStorage.getItem(id);
+            indexJs.mapSourceProject(JSON.parse(objDataProject));
+            $('#project-list').modal('hide');
+        });
+    },
+    mapSourceProject: function(data){
+        $('input.cs-project-name').prop('data',data);       
+        //clear control
+        $('input.cs-project-name').val(data?.projectName ?? '');
+        indexJs.data.client = data.dataSource ?? [];
+        indexJs.reload();
+    },
     designAuto: function(){
         //clear display
         indexJs.clearContentItem();
@@ -114,10 +146,13 @@ var indexJs = {
         //access main
         let indexRegionParent = 0;
         let contentId = '';
+        let rectCount = rects.length;
+        let regCount = 0;
         while(rects.length > 0){
             //addition region parent
             if(regions.length == 0)
             {
+                regCount++;
                 contentId = cs_common.newId();
                 indexRegionParent += 1;
                 regions.push(regMain);
@@ -168,8 +203,10 @@ var indexJs = {
                 return parseFloat(b.w) - parseFloat(a.w);
             });
         }
-        console.log("regions: ", regions);
-        
+        $('span.cs-quantity-cut').html('<b>'+rectCount+'</b>');
+        $('span.cs-quantity-big').html('<b>'+regCount+'</b>');
+
+        console.log('regs Len:'+ regions.length);
     },
     addContent: function(contentId, index){
         let contentHtml = '<div class="cs-view-detail" id="'+contentId+'"><div class="cs-view-detail-title">Tấm '+index+'</div><div class="cs-view-detail-content content-'+index+'"></div></div>'
