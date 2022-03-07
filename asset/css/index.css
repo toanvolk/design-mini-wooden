@@ -26,6 +26,10 @@
     border-radius: 1%;
     float: left;
 }
+.cs-view{
+    height: 780px;
+    overflow: auto;
+}
 .cs-view .cs-view-detail .cs-view-detail-content{
     border: 1px solid #ccc;
     position: relative;
