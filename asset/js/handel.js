@@ -124,7 +124,7 @@ var indexJs =
         //variable
         let regions= [];
         let rects = [];
-
+        let isDistinguish = $('input#distinguish-w-h').prop("checked");
         let regMain = {
             x: 0,
             y: 0,
@@ -199,6 +199,42 @@ var indexJs =
                     isDefaultRemove = false;                    
                     break;
                 }
+                if(isDistinguish==false)
+                {
+                    let tmpHW = rect.w;
+                    rect.w = rect.h;
+                    rect.h = tmpHW;
+                    if(reg.w >= rect.w && reg.h >= rect.h)
+                    {
+                        //happy case
+                        rects.splice(i,1);
+                        let drawRect = {
+                            name: rect.name,
+                            x : reg.x,
+                            y: reg.y,
+                            w: rect.w,
+                            h: rect.h
+                        }
+
+                        indexJs.addContentItem(contentId, drawRect);
+                        let regNew1 = {
+                            x: reg.x,
+                            y: reg.y + rect.h,
+                            w: reg.w,
+                            h: reg.h - rect.h
+                        }, regNew2 = {
+                            x: reg.x + rect.w,
+                            y: reg.y,
+                            w: reg.w - rect.w,
+                            h: rect.h
+                        };
+                                            
+                        regions.splice(indexRegionsLast,1);
+                        regions.push(regNew1, regNew2);
+                        isDefaultRemove = false;                    
+                        break;
+                    }
+                }                
             }
             if(isDefaultRemove) regions.splice(indexRegionsLast,1);
             regions.removeIf(function(obj, index){

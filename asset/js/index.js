@@ -62,10 +62,7 @@
     });
     $('.btn-new-project').click(function(){
         $('#create-new-project').modal('hide');
-        $('input.cs-project-name').prop('data',null);       
-        //clear control
-        $('input.cs-project-name').val('');
-        indexJs.data.client = [];
+        indexJs.mapSourceProject(null);
         indexJs.reload();
     });
     $('button.area-choose-project-action').click(function(){
@@ -97,18 +94,19 @@
         localStorage.setItem(indexJs.const.projectListString, JSON.stringify(indexJs.projectList));
 
         //clear control - change status to create
-        $('input.cs-project-name').prop('data',null);       
-        $('input.cs-project-name').val('');
-        indexJs.data.client = [];
+        indexJs.mapSourceProject(null);
         indexJs.reload();
         $('#remove-project-modal').modal('hide');
     });
     $('button.btn-print-view').click(function(){
         let titleHtml = '<p class="cs-view-title"><b>'+$('input.cs-project-name').val().toUpperCase()+'</b></p>';
         $('.cs-view').prepend($(titleHtml));
-        $('.cs-view').css({"height": "auto", "zoom": "89%"});        
+        $('.cs-view').css({"height": "auto"});        
         $('#view-main').print();
         $( ".cs-view p.cs-view-title" ).remove();
-        $('.cs-view').css({"height": "","zoom": "100%"});
+        $('.cs-view').css({"height": ""});
+    });
+    $('input#distinguish-w-h').click(function(){
+        indexJs.reload();
     });
 })(indexJs);
