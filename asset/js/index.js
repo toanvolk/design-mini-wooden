@@ -71,5 +71,44 @@
     $('button.area-choose-project-action').click(function(){
         indexJs.loadProjectList();
     });
+    $('button.btn-remove-project-warning').click(function(){
+        let data = $('input.cs-project-name').prop('data');
+        if(data== null)
+        {
+            alert("Không tìm thấy dự án cần xóa!")
+            return;
+        }else{
+            $('#remove-project-modal').modal('show');
+            $('#remove-project-modal .modal-body').html('<p>Chắc xóa dự án <b>'+data.projectName+'</b> ?</p>');
+            $('#remove-project-modal button.btn-remove-project').prop('data',data);        
+        }
+    });
+    $('button.btn-remove-project').click(function(){
+        let objData = $(this).prop('data');
+        console.log(objData);
+        
 
+        let indexObj = indexJs.projectList.findIndex(function(value) {
+            return value == objData.id;
+        });
+        if (indexObj !== -1) indexJs.projectList.splice(indexObj, 1);
+        //remove obj from storage
+        localStorage.removeItem(objData.id);
+        localStorage.setItem(indexJs.const.projectListString, JSON.stringify(indexJs.projectList));
+
+        //clear control - change status to create
+        $('input.cs-project-name').prop('data',null);       
+        $('input.cs-project-name').val('');
+        indexJs.data.client = [];
+        indexJs.reload();
+        $('#remove-project-modal').modal('hide');
+    });
+    $('button.btn-print-view').click(function(){
+        let titleHtml = '<p class="cs-view-title"><b>'+$('input.cs-project-name').val().toUpperCase()+'</b></p>';
+        $('.cs-view').prepend($(titleHtml));
+        $('.cs-view').css({"height": "auto", "zoom": "89%"});        
+        $('#view-main').print();
+        $( ".cs-view p.cs-view-title" ).remove();
+        $('.cs-view').css({"height": "","zoom": "100%"});
+    });
 })(indexJs);

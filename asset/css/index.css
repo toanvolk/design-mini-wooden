@@ -5,6 +5,7 @@
     margin-left: 0;
     margin-right: 0;
     max-width: 100%;
+    margin-top: 10px !important;
 }
 .cs-data-input-nav{
     margin-top: 0.5%;
@@ -30,6 +31,9 @@
     height: 780px;
     overflow: auto;
 }
+.cs-view .cs-view-title{
+    text-align: center;
+}
 .cs-view .cs-view-detail .cs-view-detail-content{
     border: 1px solid #ccc;
     position: relative;
@@ -45,4 +49,15 @@
 }
 .cs-summary .cs-summary-value{
     color: red;
+}
+.area-action-header{
+    margin-bottom: 3px;
+}
+.cs-float-left{
+    float: left;
+    margin: 1px;
+}
+.cs-float-right{
+    float: right;
+    margin: 1px;
 }

@@ -4,6 +4,7 @@
   <title>Sắp xếp ván</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="./asset/img/woodle-flat.png" type="image/icon type">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="./asset/css/index.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -19,64 +20,103 @@
   
 <div class="container mt-5 cs-containder">
   <div class="row">
-    <div class="col-sm-4 cs-setup">
-      <div class="row cs-project-info">
-        <div class="input-group mb-3 cs-project-action">
-          <div class="area-create-project">
-              <!-- Button trigger modal -->
-              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create-new-project">
-                Tạo mới
-              </button>
+    <div class="area-action-header">
+      <div class="area-create-project cs-float-left">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create-new-project" title="Tạo mới">         
+          <i class="fa-solid fa-circle-plus"></i>
+        </button>
 
-              <!-- Modal -->
-              <div class="modal fade" id="create-new-project" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <!-- <h5 class="modal-title" id="exampleModalLabel">Tạo dự án mới ?</h5> -->
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                      Tạo dự án mới?
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Thoát</button>
-                      <button type="button" class="btn btn-primary btn-new-project">Tạo</button>
-                    </div>
-                  </div>
-                </div>
+        <!-- Modal -->
+        <div class="modal fade" id="create-new-project" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <!-- <h5 class="modal-title" id="exampleModalLabel">Tạo dự án mới ?</h5> -->
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
-          </div>
-          <div class="area-choose-project">
-              <!-- Button trigger modal -->
-              <button type="button" class="btn btn-info area-choose-project-action" data-bs-toggle="modal" data-bs-target="#project-list">
-                Danh sách
-              </button>
-
-              <!-- Modal -->
-              <div class="modal fade" id="project-list" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="staticBackdropLabel">Danh sách dự án</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body project-list">
-                      ...
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                    </div>
-                  </div>
-                </div>
+              <div class="modal-body">
+                Tạo dự án mới?
               </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Thoát</button>
+                <button type="button" class="btn btn-primary btn-new-project">Tạo</button>
+              </div>
+            </div>
           </div>
         </div>
+      </div>
+      <div class="area-choose-project cs-float-left">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-info area-choose-project-action" data-bs-toggle="modal" data-bs-target="#project-list" title="Danh sách dự án">
+          <i class="fa-solid fa-list"></i>
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="project-list" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Danh sách dự án</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body project-list">
+                ...
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="area-remove-project cs-float-right">
+        <button type="button" class="btn btn-danger btn-remove-project-warning" data-toggle="modal" data-target="#exampleModal" title="Xóa dự án">
+          <i class="fa-solid fa-trash"></i>
+        </button>
+        
+        <!-- Modal -->
+        <div class="modal fade" id="remove-project-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="remove-project-title-modal">Xóa dự án</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary btn-remove-project">Xóa</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="area-view-project cs-float-right">
+        <button type="button" class="btn btn-info btn-print-view">
+          <i class="fa-solid fa-print"></i>
+        </button>
+      </div>
+      <div class="area-view-project cs-float-right">
+        <div class="input-group">
+          <span class="input-group-text"><i class="fas fa-search-plus"></i></span>
+          <input type="number" class="form-control" min="30" max="100" value="100" onchange="indexJs.zoomView(this.value)">
+          <span class="input-group-text">%</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4 cs-setup">
+      <div class="row cs-project-info">
         <h3>Thông tin dự án</h3> 
         <div class="input-group mb-3 cs-project-info">
           <span class="input-group-text cs-input-group-text">Tên</span>
           <input type="text"class="form-control cs-project-name"placeholder="Tên dự án" >
-          <button class="btn btn-success btn-save-project">Lưu</button>
+          <button class="btn btn-success btn-save-project" title="Lưu"><i class="fa-solid fa-floppy-disk"></i></button>
         </div>
       </div>
       <div class="row cs-config">
@@ -85,11 +125,11 @@
       </div>
       <div class="row cs-nav">
         <div class="input-group mb-3 cs-data-input-nav">
-          <span class="input-group-text cs-input-group-text bg-primary">Tấm mới</span>
+          <span class="input-group-text cs-input-group-text bg-primary">Ván cắt</span>
           <input type="number"class="form-control cs-data-input-nav-w"placeholder="W" data-field="w" min="1" max="1200">
           <input type="number"class="form-control cs-data-input-nav-h"placeholder="H" data-field="h" min="1" max="2400">
           <input type="number"class="form-control cs-data-input-nav-quantity"placeholder="Số lượng" data-field="quantity" min="1" value="1">
-          <button class="btn btn-success btn-nav-add-class">+</button>
+          <button class="btn btn-success btn-nav-add-class"><i class="fa-solid fa-plus"></i></button>
         </div>
       </div>
       <div class="row cs-client">
@@ -100,33 +140,14 @@
       <div class="row cs-summary">
         <p>Số tấm cắt: <span class="cs-quantity-cut cs-summary-value"></span>, Tổng ván cần đặt: <span class="cs-quantity-big cs-summary-value"></span></p>
       </div>
+      
     </div>
     <div class="col-sm-8 cs-view" id="view-main">
-      <div class="cs-view-detail">
-           <div class="cs-view-detail-title">Tấm 1</div>           
-           <div class="cs-view-detail-content content-1">
-           </div>           
-      </div>     
-      <div class="cs-view-detail">
-        <div class="cs-view-detail-title">Tấm 2</div>           
-        <div class="cs-view-detail-content content-2"></div>           
-      </div>    
-      <div class="cs-view-detail">
-        <div class="cs-view-detail-title">Tấm 3</div>           
-        <div class="cs-view-detail-content content-3"></div>           
-      </div>
-      <div class="cs-view-detail">
-        <div class="cs-view-detail-title">Tấm 4</div>           
-        <div class="cs-view-detail-content content-4"></div>           
-      </div>
-      <div class="cs-view-detail">
-        <div class="cs-view-detail-title">Tấm 5</div>           
-        <div class="cs-view-detail-content content-5"></div>           
-      </div>
     </div>
   </div>
 </div>
 
+<script src="./asset/js/jQuery.print.js"></script>
 <script src="./asset/js/common.min.js"></script>
 <script src="./asset/js/handel.min.js"></script>
 <script src="./asset/js/index.min.js"></script>

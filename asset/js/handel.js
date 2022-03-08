@@ -55,7 +55,7 @@ var indexJs =
                             $(dom).val(value[field]);
                         }else{
                             $(dom).text(key+1);
-                            $(dom).css('background-color',value["bg_color"]);
+                            //$(dom).css('background-color',value["bg_color"]);
                         }
                     }).parent();
                     
@@ -81,7 +81,7 @@ var indexJs =
     },
     loadProjectList: function(){
         $('.project-list').html('');
-        let htmlTable = '<table class="table project-list-table"><thead><tr><th scope="col">#</th><th scope="col">Tên dự án</th><th scope="col">Ngày tạo</th><th scope="col">...</th></tr></thead><tbody>{list-source}</tbody></table>';
+        let htmlTable = '<table class="table project-list-table"><thead><tr><th scope="col">#</th><th scope="col">Tên dự án</th><th scope="col">Ngày tạo</th></tr></thead><tbody>{list-source}</tbody></table>';
         let htmlData = '';
         let index = 0;
         indexJs.projectList.sort(function(a, b) {
@@ -90,7 +90,7 @@ var indexJs =
         indexJs.projectList.forEach(project => {
             index++;
             let objProject = JSON.parse(localStorage.getItem(project));
-            htmlData+='<tr data-id="'+objProject.id+'"><th scope="row">'+index+'</th><td><p class="text-info btn-choose-project cs-pointer">'+objProject.projectName+'</p></td><td>'+objProject.createTime+'</td><td><i class="fas fa-trash-alt btn-remove-project cs-pointer"></i></td></tr>';
+            htmlData+='<tr data-id="'+objProject.id+'"><th scope="row">'+index+'</th><td><p class="text-info btn-choose-project cs-pointer">'+objProject.projectName+'</p></td><td>'+objProject.createTime+'</td></tr>';
         });
         htmlTable = htmlTable.replace('{list-source}',htmlData);
         $('.project-list').append($(htmlTable));
@@ -231,6 +231,8 @@ var indexJs =
     clearContentItem: function(){
         let $content = $('#view-main');       
         $content.html('');
+    },
+    zoomView: function(value){
+        $('.cs-view').css({"zoom": value+"%"});
     }
-    
 };
