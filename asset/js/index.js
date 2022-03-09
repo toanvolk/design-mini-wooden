@@ -40,7 +40,7 @@
             objProject = {
                 id:  'woodle_'+ Date.now(),
                 projectName: projectName,
-                createTime: new Date().toDateStringDisplay()
+                createTime: new Date().toDateStringDisplay(),
             }
             //Lưu danh sách chọn
             indexJs.projectList.push(objProject.id);
@@ -53,6 +53,7 @@
             objProject['lastModifyTime'] = new Date().toDateStringDisplay();
         }
         //lưu data
+        objProject ["isDistinguishWidthAndHeight"] = $('input#distinguish-w-h').prop("checked");
         objProject['dataSource'] = indexJs.data.client;
         let dataString = JSON.stringify(objProject);
         localStorage.setItem(objProject.id, dataString);
@@ -99,14 +100,29 @@
         $('#remove-project-modal').modal('hide');
     });
     $('button.btn-print-view').click(function(){
+        let objConfig = indexJs.data.config.get();        
         let titleHtml = '<p class="cs-view-title"><b>'+$('input.cs-project-name').val().toUpperCase()+'</b></p>';
         $('.cs-view').prepend($(titleHtml));
-        $('.cs-view').css({"height": "auto"});        
+        let zoomValue = $('.cs-view').css('zoom');
+        $('.cs-view').css({"height": "auto", "zoom": objConfig.zoomPrint+"%"});        
         $('#view-main').print();
         $( ".cs-view p.cs-view-title" ).remove();
-        $('.cs-view').css({"height": ""});
+        $('.cs-view').css({"height": "", "zoom": zoomValue});
     });
     $('input#distinguish-w-h').click(function(){
         indexJs.reload();
+    });
+    var setupClientModal = document.getElementById('setup-client-modal')
+    setupClientModal.addEventListener('shown.bs.modal', function (event) {
+        let objConfig = indexJs.data.config.get();
+        $('input#zoom-print').val(objConfig['zoomPrint'])
+    })
+    $('button.btn-save-config').click(function(){
+        let zoomValue = $('input#zoom-print').val();
+        let objConfig = indexJs.data.config.get();
+        objConfig["zoomPrint"] = zoomValue;
+        indexJs.data.config.set(objConfig);
+
+        $('#setup-client-modal').modal('hide');
     });
 })(indexJs);

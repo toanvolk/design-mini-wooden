@@ -1,0 +1,10 @@
+body,html {
+    background-image: url('../img/login-bg-zoro.jpg');
+}
+
+#profile-img {
+    height:180px;
+}
+.h-80 {
+    height: 80% !important;
+}

@@ -3,20 +3,52 @@ var indexJs =
     const: {
         HtmlClientContent: '<div class="input-group mb-3 cs-data-input"><span class="input-group-text cs-input-group-text bd-data bd-name" data-field="name"></span><input type="number"class="form-control bd-data bd-w"placeholder="W" data-field="w" readonly><input type="number"class="form-control bd-data bd-h"placeholder="H" data-field="h" readonly><input type="number"class="form-control bd-data bd-quanlity" placeholder="Số lượng" data-field="quantity"><button class="btn btn-danger cs-btn-remove-item">-</button></div>',
         constantZOOM: 1,
-        projectListString: 'woodle_list_private'
+        projectListString: 'woodle_list_private',
+        projectConfigString: 'woodle_config_client',
+        publicKeyString: 'woodle_public_key',
+        privateKeyString: 'woodle_private_key'
     },
     data: {
+        permission: {
+            publicKey: function(){
+                let k = localStorage.getItem(indexJs.const.publicKeyString);
+                if(k==null) 
+                {
+                    k = Date.now()
+                    localStorage.setItem(indexJs.const.publicKeyString, k);
+                }
+                return k;
+            },
+            privateKey: function(){
+                let k = localStorage.getItem(indexJs.const.privateKeyString);
+                return k;
+            }
+        },
         config:{
             w:1200,
             h:2400,
             x:360,
-            y:720
+            y:720,
+            get: function(){
+                let stringConfig = localStorage.getItem(indexJs.const.projectConfigString);
+                if(stringConfig != null)
+                {
+                    return JSON.parse(stringConfig);                    
+                };
+                return {
+                    zoomPrint: 100
+                };
+            },
+            set: function(config){
+                localStorage.setItem(indexJs.const.projectConfigString,JSON.stringify(config));
+            },
         },
         client:[]
     },
     projectList:[],
 
     init: function(){
+        indexJs.isPermission();
         $('.cs-setup .cs-data').text("W: "+indexJs.data.config.w + " | "+ "H: "+indexJs.data.config.h + " (đơn vị: mm)");
         // Load dữ liệu đệm
         let sourceProjectList = localStorage.getItem(this.const.projectListString);
@@ -26,6 +58,15 @@ var indexJs =
         this.loadProjectList();
         // khởi tạo thiết lập
         indexJs.reload();        
+    },    
+    isPermission: function(){
+        let m = String(new Date().getMonth() + 1).padStart(2, '0');
+        let kp = indexJs.data.permission.publicKey();
+        let kpr = indexJs.data.permission.privateKey();
+        if($.MD5(kp+m) !== kpr)
+        {
+            window.location.href = "./login.html";
+        }
     },
     convertToDisplay: function(value){
         return value*this.const.constantZOOM;
@@ -108,11 +149,19 @@ var indexJs =
         if(data==null)
         {
             $('input.cs-project-name').val('');
+            $('input#distinguish-w-h').prop("checked", true);
             indexJs.data.client = [];
         }
         else
         {
+            let isDistinguishWidthAndHeight = true;
+            if(data['isDistinguishWidthAndHeight'] != undefined) 
+            {
+                isDistinguishWidthAndHeight = data['isDistinguishWidthAndHeight'];
+            };
             $('input.cs-project-name').val(data.projectName);
+            $('input#distinguish-w-h').prop("checked", isDistinguishWidthAndHeight);
+
             indexJs.data.client = data.dataSource;
         };
         indexJs.reload();
@@ -153,6 +202,7 @@ var indexJs =
         let contentId = '';
         let rectCount = rects.length;
         let regCount = 0;
+        let convertCount = 0;
         while(rects.length > 0){
             //addition region parent
             if(regions.length == 0)
@@ -199,7 +249,7 @@ var indexJs =
                     isDefaultRemove = false;                    
                     break;
                 }
-                if(isDistinguish==false)
+                if(!isDistinguish)
                 {
                     let tmpHW = rect.w;
                     rect.w = rect.h;
@@ -216,7 +266,7 @@ var indexJs =
                             h: rect.h
                         }
 
-                        indexJs.addContentItem(contentId, drawRect);
+                        indexJs.addContentItem(contentId, drawRect, !isDistinguish);
                         let regNew1 = {
                             x: reg.x,
                             y: reg.y + rect.h,
@@ -233,6 +283,12 @@ var indexJs =
                         regions.push(regNew1, regNew2);
                         isDefaultRemove = false;                    
                         break;
+                    }
+                    else{
+                        //convert
+                        tmpHW = rect.w;
+                        rect.w = rect.h;
+                        rect.h = tmpHW;
                     }
                 }                
             }
@@ -254,7 +310,7 @@ var indexJs =
         let $view = $('#view-main');
         $view.append($(contentHtml));
     },
-    addContentItem: function(contentId, objRect){
+    addContentItem: function(contentId, objRect, isConvert = false){
         let $content = $('#'+contentId + ' .cs-view-detail-content');       
         let $itemHtml = $('<div class="rect-item"><small title="'+this.convertRealSize(objRect.w)+'x'+this.convertRealSize(objRect.h)+'">('+this.convertRealSize(objRect.w)+'x'+this.convertRealSize(objRect.h)+')</small></div>').css({
             "left": this.convertUnitToPercent(objRect.x, 'x')  +"%",
@@ -262,6 +318,11 @@ var indexJs =
             "width":  this.convertUnitToPercent(objRect.w, 'w')  +"%",
             "height": this.convertUnitToPercent(objRect.h,'h')  +"%",
         });
+        if(isConvert) 
+        {
+            $itemHtml.addClass('cs-rect-convert');
+            $itemHtml.prop('title',"Hoán đổi rộng cao!");
+        }
         $content.append($itemHtml);
     },
     clearContentItem: function(){

@@ -38,14 +38,15 @@
     border: 1px solid #ccc;
     position: relative;
     height: 720px;
-    width: 360px;
+    width: 360px;    
+    background-image: url('../img/woodle-bg-1.gif') ;
 }
 .cs-view .cs-view-detail .cs-view-detail-content .rect-item{
-    border: 1px solid #ccc;
+    border: 1px solid #b34646;
     border-style: dashed;
     position: absolute;
     padding-left: 1%;
-    background-color: azure;
+    /* background-color: #f0ffff; */
 }
 .cs-summary .cs-summary-value{
     color: red;
@@ -60,4 +61,10 @@
 .cs-float-right{
     float: right;
     margin: 1px;
+}
+.cs-switch-distinguish{
+    padding-left: 3.2em;
+}
+.cs-rect-convert{
+    background: repeating-linear-gradient(115deg,transparent,transparent 10px,#ccc 6px,#ccc 12px),linear-gradient(to bottom,#e7dec6,#e7dece);
 }
