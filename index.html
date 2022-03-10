@@ -148,6 +148,18 @@
           <span class="input-group-text cs-input-group-text">Tên</span>
           <input type="text"class="form-control cs-project-name"placeholder="Tên dự án" >
           <button class="btn btn-success btn-save-project" title="Lưu"><i class="fa-solid fa-floppy-disk"></i></button>
+
+          <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+            <div id="toast-save" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="2000">
+              <div class="toast-header bg-success">
+                <strong class="me-auto text-white">Thông báo</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+              </div>
+              <div class="toast-body">
+                Lưu thành công!
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="row cs-config">

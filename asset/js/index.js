@@ -58,8 +58,8 @@
         let dataString = JSON.stringify(objProject);
         localStorage.setItem(objProject.id, dataString);
         $('input.cs-project-name').prop('data',objProject);
-
-        alert('Lưu thành công!');
+        
+        new bootstrap.Toast('#toast-save').show();
     });
     $('.btn-new-project').click(function(){
         $('#create-new-project').modal('hide');
