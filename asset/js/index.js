@@ -32,7 +32,8 @@
 
         if(projectName.trim() == '')
         {
-            alert("Hãy nhập tên dự án.");
+            $("#toast-save-failed .toast-body").text('Hãy nhập tên dự án.');
+            new bootstrap.Toast('#toast-save-failed').show();
             return;
         }
         let objProject= {};
