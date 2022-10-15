@@ -180,6 +180,7 @@ var indexJs =
             w : this.convertToDisplay(this.data.config.w),
             h : this.convertToDisplay(indexJs.data.config.h)
         }
+        let total_circumference = 0; //total circumference
         // regions.push(regMain);
         //read source and init data        
         $.each(indexJs.data.client, function(key,value){
@@ -190,8 +191,10 @@ var indexJs =
                     w: indexJs.convertToDisplay(value.w),
                     h: indexJs.convertToDisplay(value.h)
                 };
-                rects.push(objRect);
+                rects.push(objRect);                
             };
+            //perimeter
+            total_circumference += 2*(Number(value.w)+Number(value.h))*Number(value.quantity);
         });
         //with sort
         rects.sort(function(a, b) {
@@ -302,7 +305,10 @@ var indexJs =
         }
         $('span.cs-quantity-cut').html('<b>'+rectCount+'</b>');
         $('span.cs-quantity-big').html('<b>'+regCount+'</b>');
-
+        if(total_circumference > 0){
+            $('span.cs-total-circumference').html('<b>'+total_circumference+'(mm) -> '+total_circumference/1000+'(m) </b>');            
+            $('span.cs-total-skein').html('<b>'+Math.ceil(total_circumference/100000)+' (cuộn) </b>');
+        }           
         console.log('regs Len:'+ regions.length);
     },
     addContent: function(contentId, index){
